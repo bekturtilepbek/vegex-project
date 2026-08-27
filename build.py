@@ -68,6 +68,9 @@ def compressed_data_uri(path: Path) -> str:
         return f"data:image/jpeg;base64,{b64}"
 
 
+CLOUDFLARE_ASSET_LIMIT_MB = 25
+
+
 def copy_hero_video(out_dir: Path) -> str | None:
     """
     Если в static/video/ есть hero.mp4 (или .webm) — копируем как отдельный
@@ -78,6 +81,10 @@ def copy_hero_video(out_dir: Path) -> str | None:
     Pages просто отдаёт видео отдельным запросом с кэшированием) — оно
     касалось только локальной проверки через file://. Для локального
     просмотра с видео используйте `python -m http.server -d dist`.
+
+    Cloudflare Workers/Pages не примет ни один статический файл тяжелее
+    25 МБ (деплой упадёт с "Asset too large") — проверяем это здесь, чтобы
+    поймать проблему на сборке, а не только при пуше на прод.
     """
     video_dir = STATIC / "video"
     if not video_dir.exists():
@@ -86,6 +93,15 @@ def copy_hero_video(out_dir: Path) -> str | None:
         candidates = sorted(video_dir.glob(f"hero.{ext}"))
         if candidates:
             src = candidates[0]
+            size_mb = src.stat().st_size / 1024 / 1024
+            if size_mb > CLOUDFLARE_ASSET_LIMIT_MB:
+                print(
+                    f"  ⚠️  ВНИМАНИЕ: {src.name} весит {size_mb:.1f} МБ — "
+                    f"больше лимита Cloudflare в {CLOUDFLARE_ASSET_LIMIT_MB} МБ. "
+                    f"Деплой на Cloudflare Pages упадёт. Сожмите видео перед пушем, "
+                    f"например: ffmpeg -i hero.mp4 -vf scale=1600:-2 -c:v libx264 "
+                    f"-crf 28 -an -movflags +faststart hero-small.mp4"
+                )
             assets_dir = out_dir / "assets"
             assets_dir.mkdir(parents=True, exist_ok=True)
             dest = assets_dir / f"hero.{ext}"
