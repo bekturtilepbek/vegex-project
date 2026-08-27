@@ -68,12 +68,16 @@ def compressed_data_uri(path: Path) -> str:
         return f"data:image/jpeg;base64,{b64}"
 
 
-def find_hero_video() -> str | None:
+def copy_hero_video(out_dir: Path) -> str | None:
     """
-    Если в static/video/ есть hero.mp4 (или .webm) — встраиваем как base64
-    <video>, тем же принципом, что и фото (без внешних хостингов вроде
-    YouTube — ради самодостаточности и GDPR). Пока файла нет — используется
-    статичное фото.
+    Если в static/video/ есть hero.mp4 (или .webm) — копируем как отдельный
+    файл рядом с index.html (НЕ base64). Видео обычно весит десятки МБ —
+    в отличие от фото/шрифтов, инлайнить его в HTML нельзя: страница
+    раздувается до многих десятков МБ и не открывается нормально.
+    На self-contained-требование это не влияет для продакшена (Cloudflare
+    Pages просто отдаёт видео отдельным запросом с кэшированием) — оно
+    касалось только локальной проверки через file://. Для локального
+    просмотра с видео используйте `python -m http.server -d dist`.
     """
     video_dir = STATIC / "video"
     if not video_dir.exists():
@@ -81,10 +85,12 @@ def find_hero_video() -> str | None:
     for ext in ("mp4", "webm"):
         candidates = sorted(video_dir.glob(f"hero.{ext}"))
         if candidates:
-            path = candidates[0]
-            mime = "video/mp4" if ext == "mp4" else "video/webm"
-            b64 = base64.b64encode(path.read_bytes()).decode("ascii")
-            return f"data:{mime};base64,{b64}"
+            src = candidates[0]
+            assets_dir = out_dir / "assets"
+            assets_dir.mkdir(parents=True, exist_ok=True)
+            dest = assets_dir / f"hero.{ext}"
+            shutil.copy2(src, dest)
+            return f"assets/hero.{ext}"
     return None
 
 
@@ -157,8 +163,11 @@ def make_env(images: dict) -> Environment:
     return env
 
 
-def render_lang(env, lang, css, js, fonts_css, fonts_present, hero_video):
+def render_lang(env, lang, css, js, fonts_css, fonts_present):
     ctx = load_content(lang)
+    out_dir = DIST / lang
+    out_dir.mkdir(parents=True, exist_ok=True)
+    hero_video = copy_hero_video(out_dir)
     ctx.update({
         "lang": lang,
         "langs": LANGS,
@@ -169,10 +178,8 @@ def render_lang(env, lang, css, js, fonts_css, fonts_present, hero_video):
         "hero_video": hero_video,
     })
     html = env.get_template("base.html").render(**ctx)
-    out_dir = DIST / lang
-    out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "index.html").write_text(html, encoding="utf-8")
-    return len(html)
+    return len(html), hero_video is not None
 
 
 def main():
@@ -184,16 +191,14 @@ def main():
     fonts_css = build_fonts_css()
     fonts_present = bool(fonts_css)
     images = build_image_index()
-    hero_video = find_hero_video()
 
     env = make_env(images)
 
     print(f"Фото в индексе: {len(images)} | шрифты инлайн: {'да' if fonts_present else 'нет (Google Fonts fallback)'}")
-    if hero_video:
-        print("Видео на фоне hero: найдено, встраиваю")
     for lang in LANGS:
-        size = render_lang(env, lang, css, js, fonts_css, fonts_present, hero_video)
-        print(f"  dist/{lang}/index.html — {size // 1024} КБ")
+        size, has_video = render_lang(env, lang, css, js, fonts_css, fonts_present)
+        video_note = " + видео скопировано отдельным файлом" if has_video else ""
+        print(f"  dist/{lang}/index.html — {size // 1024} КБ{video_note}")
 
     primary = LANGS[0]
     (DIST / "index.html").write_text(

@@ -31,35 +31,3 @@ if (burger && nav) {
     a.addEventListener('click', () => document.body.classList.remove('nav-open'))
   );
 }
-
-/* --- форма заявки: прогрессивная отправка на Cloudflare Pages Function /contact --- */
-const form = document.querySelector('[data-contact-form]');
-if (form) {
-  const status = form.querySelector('[data-form-status]');
-  const btn = form.querySelector('button[type="submit"], .btn-o');
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const setStatus = (msg, ok) => {
-      if (!status) return;
-      status.textContent = msg;
-      status.dataset.state = ok ? 'ok' : 'err';
-    };
-    const payload = Object.fromEntries(new FormData(form).entries());
-    const original = btn ? btn.textContent : '';
-    if (btn) { btn.disabled = true; btn.textContent = btn.dataset.sending || 'Отправляем…'; }
-    try {
-      const res = await fetch(form.getAttribute('action') || '/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      if (!res.ok) throw new Error('bad status ' + res.status);
-      form.reset();
-      setStatus(form.dataset.msgOk || 'Заявка отправлена. Ответим в течение рабочего дня.', true);
-    } catch (err) {
-      setStatus(form.dataset.msgErr || 'Не удалось отправить. Напишите нам на info@vegex.kg.', false);
-    } finally {
-      if (btn) { btn.disabled = false; btn.textContent = original; }
-    }
-  });
-}
