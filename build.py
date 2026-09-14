@@ -231,6 +231,16 @@ def main():
         print(f"  dist/{lang}/index.html — {size // 1024} КБ, фото: {n_images} отдельными файлами{video_note}")
 
     primary = LANGS[0]
+
+    # Редирект с "/" на "/ru/" — раньше был через <meta http-equiv="refresh">
+    # в dist/index.html, а это заметная пауза с белым экраном: браузер должен
+    # сначала полностью получить и отрисовать HTML, и только потом сработает
+    # meta-refresh. _redirects — нативный механизм Cloudflare Pages, редирект
+    # происходит на edge до отдачи какого-либо HTML, без мигания.
+    # dist/index.html оставляем как fallback (на случай file:// или хостинга
+    # без поддержки _redirects) — в проде Cloudflare отдаёт редирект раньше,
+    # чем вообще дойдёт до этого файла.
+    (DIST / "_redirects").write_text(f"/  /{primary}/  301\n", encoding="utf-8")
     (DIST / "index.html").write_text(
         "<!DOCTYPE html><html lang=\"" + primary + "\"><head><meta charset=\"UTF-8\">"
         f"<meta http-equiv=\"refresh\" content=\"0; url=/{primary}/\">"
@@ -238,7 +248,8 @@ def main():
         f"<title>VEGEX</title></head><body><a href=\"/{primary}/\">VEGEX</a></body></html>",
         encoding="utf-8",
     )
-    print(f"  dist/index.html — редирект на /{primary}/")
+    print(f"  dist/_redirects — 301 / -> /{primary}/ (Cloudflare edge, без meta-refresh)")
+    print(f"  dist/index.html — резервный редирект на /{primary}/")
     print("Готово.")
 
 
