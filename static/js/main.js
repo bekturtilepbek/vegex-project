@@ -32,15 +32,13 @@ if (leadForm) {
     const status = leadForm.querySelector('[data-form-status]');
     const data = new FormData(leadForm);
     const name = (data.get('name') || '').trim();
-    const email = (data.get('email') || '').trim();
-    if (!name || !email) {
+    if (!name) {
       if (status) { status.textContent = leadForm.dataset.err; status.dataset.state = 'err'; }
       return;
     }
     const lines = ['Заявка с сайта VEGEX:', `Имя: ${name}`];
     const company = (data.get('company') || '').trim();
     if (company) lines.push(`Компания: ${company}`);
-    lines.push(`Email: ${email}`);
     const phone = (data.get('phone') || '').trim();
     if (phone) lines.push(`Телефон: ${phone}`);
     const message = (data.get('message') || '').trim();
