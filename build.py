@@ -52,9 +52,7 @@ IMG_MAX_DIMENSION = 1800
 IMG_JPEG_QUALITY = 78
 
 
-def compressed_data_uri(path: Path) -> str:
-    if path.suffix.lower() not in (".jpg", ".jpeg", ".png", ".webp"):
-        return data_uri(path)
+def compressed_jpeg_bytes(path: Path) -> bytes:
     with Image.open(path) as im:
         im = im.convert("RGB")
         w, h = im.size
@@ -64,8 +62,7 @@ def compressed_data_uri(path: Path) -> str:
             im = im.resize((round(w * scale), round(h * scale)), Image.LANCZOS)
         buf = io.BytesIO()
         im.save(buf, format="JPEG", quality=IMG_JPEG_QUALITY, optimize=True)
-        b64 = base64.b64encode(buf.getvalue()).decode("ascii")
-        return f"data:image/jpeg;base64,{b64}"
+        return buf.getvalue()
 
 
 CLOUDFLARE_ASSET_LIMIT_MB = 25
@@ -110,16 +107,33 @@ def copy_hero_video(out_dir: Path) -> str | None:
     return None
 
 
-def build_image_index() -> dict:
+def copy_images(out_dir: Path) -> dict:
+    """
+    Сжимает фото (Pillow) и копирует как отдельные JPEG-файлы в
+    dist/<lang>/assets/images/ — по тому же принципу, что и hero-видео
+    (copy_hero_video): раньше фото инлайнились в base64 прямо в HTML,
+    из-за чего страница весила МБ 3-4+ одним файлом (тот же баг, что был
+    у видео до 62 МБ). Отдельные файлы браузер кэширует по отдельности
+    и не грузит все фото разом до первой отрисовки.
+    """
     index = {}
     img_dir = STATIC / "images"
     if not img_dir.exists():
         return index
+    assets_dir = out_dir / "assets" / "images"
+    assets_dir.mkdir(parents=True, exist_ok=True)
     for f in sorted(img_dir.iterdir()):
         if not f.is_file() or f.name.startswith("."):
             continue
         key = translit(f.stem)
-        index[key] = compressed_data_uri(f)
+        if f.suffix.lower() in (".jpg", ".jpeg", ".png", ".webp"):
+            data = compressed_jpeg_bytes(f)
+            dest = assets_dir / f"{key}.jpg"
+        else:
+            data = f.read_bytes()
+            dest = assets_dir / f"{key}{f.suffix.lower()}"
+        dest.write_bytes(data)
+        index[key] = f"assets/images/{dest.name}"
     return index
 
 
@@ -161,13 +175,21 @@ def load_content(lang: str) -> dict:
         return yaml.safe_load(fh) or {}
 
 
-def make_env(images: dict) -> Environment:
-    env = Environment(
+def make_env() -> Environment:
+    return Environment(
         loader=FileSystemLoader(str(TEMPLATES)),
         autoescape=False,
         trim_blocks=True,
         lstrip_blocks=True,
     )
+
+
+def render_lang(env, lang, css, js, fonts_css, fonts_present):
+    ctx = load_content(lang)
+    out_dir = DIST / lang
+    out_dir.mkdir(parents=True, exist_ok=True)
+    hero_video = copy_hero_video(out_dir)
+    images = copy_images(out_dir)
 
     def img(key: str):
         if not key:
@@ -176,14 +198,7 @@ def make_env(images: dict) -> Environment:
 
     env.globals["img"] = img
     env.globals["has_img"] = lambda key: translit(key or "") in images
-    return env
 
-
-def render_lang(env, lang, css, js, fonts_css, fonts_present):
-    ctx = load_content(lang)
-    out_dir = DIST / lang
-    out_dir.mkdir(parents=True, exist_ok=True)
-    hero_video = copy_hero_video(out_dir)
     ctx.update({
         "lang": lang,
         "langs": LANGS,
@@ -195,7 +210,7 @@ def render_lang(env, lang, css, js, fonts_css, fonts_present):
     })
     html = env.get_template("base.html").render(**ctx)
     (out_dir / "index.html").write_text(html, encoding="utf-8")
-    return len(html), hero_video is not None
+    return len(html), hero_video is not None, len(images)
 
 
 def main():
@@ -206,15 +221,14 @@ def main():
     js = (STATIC / "js" / "main.js").read_text(encoding="utf-8")
     fonts_css = build_fonts_css()
     fonts_present = bool(fonts_css)
-    images = build_image_index()
 
-    env = make_env(images)
+    env = make_env()
 
-    print(f"Фото в индексе: {len(images)} | шрифты инлайн: {'да' if fonts_present else 'нет (Google Fonts fallback)'}")
+    print(f"Шрифты инлайн: {'да' if fonts_present else 'нет (Google Fonts fallback)'}")
     for lang in LANGS:
-        size, has_video = render_lang(env, lang, css, js, fonts_css, fonts_present)
-        video_note = " + видео скопировано отдельным файлом" if has_video else ""
-        print(f"  dist/{lang}/index.html — {size // 1024} КБ{video_note}")
+        size, has_video, n_images = render_lang(env, lang, css, js, fonts_css, fonts_present)
+        video_note = " + видео отдельным файлом" if has_video else ""
+        print(f"  dist/{lang}/index.html — {size // 1024} КБ, фото: {n_images} отдельными файлами{video_note}")
 
     primary = LANGS[0]
     (DIST / "index.html").write_text(
