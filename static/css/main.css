@@ -58,6 +58,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(247,245,239,.9);backdrop
 
 /* PRODUCT CARDS — fruitexim-style catalog grid */
 .prod-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.prod-grid.n3{grid-template-columns:repeat(3,1fr)}
 .prod-card{position:relative;border-radius:6px;overflow:hidden;aspect-ratio:16/11}
 .prod-card .ph{position:absolute;inset:0;border-radius:0;border:none}
 .prod-over{position:absolute;inset:0;background:linear-gradient(to top,rgba(14,27,18,.88) 0%,rgba(14,27,18,.15) 55%,transparent 100%);z-index:1}
@@ -261,7 +262,7 @@ footer{background:var(--ink2);color:#9fb3a3;padding:60px 0 28px}
   .spec-side{order:-1}
   .divider-photo{height:340px}
   section,.about,.markets,.cta{padding:66px 0}
-  .prod-grid{grid-template-columns:1fr}
+  .prod-grid,.prod-grid.n3{grid-template-columns:1fr}
   .partners-grid{grid-template-columns:repeat(3,1fr)}
   .facts-inner .stat{flex:1 1 50%;border-bottom:1px solid rgba(255,255,255,.1)}
   .hero-nature{height:80vh}
