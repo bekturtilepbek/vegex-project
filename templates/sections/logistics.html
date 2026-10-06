@@ -1,4 +1,4 @@
-<!-- LOGISTICS -->
+{# LOGISTICS #}
 {% set flag_svgs = {
   'de': '<svg class="flag-ico" width="24" height="16" viewBox="0 0 30 20"><rect width="30" height="6.67" y="0" fill="#000"/><rect width="30" height="6.67" y="6.67" fill="#DD0000"/><rect width="30" height="6.67" y="13.33" fill="#FFCE00"/></svg>',
   'pl': '<svg class="flag-ico" width="24" height="16" viewBox="0 0 30 20"><rect width="30" height="10" y="0" fill="#fff"/><rect width="30" height="10" y="10" fill="#DC143C"/></svg>',
@@ -14,19 +14,19 @@
       <h2 style="color:#fff;font-size:clamp(26px,3.2vw,40px);margin:14px 0 8px">{{ logistics.title }}</h2>
       <div class="grad-line"></div>
       <p style="color:#c9d6c9;margin:14px 0 28px">{{ logistics.intro }}</p>
-      <div class="inco">
-        {% for i in logistics.incoterms %}<b{% if i.soft %} class="s"{% endif %}>{{ i.label }}</b>{% endfor %}
+      <div class="inco" data-stagger>
+        {% for i in logistics.incoterms %}<b{% if i.soft %} class="s"{% endif %} style="--d:{{ "%.2f"|format(loop.index0 * 0.06) }}s">{{ i.label }}</b>{% endfor %}
       </div>
       <p class="mk-note">{{ logistics.incoterms_note }}</p>
       <p style="color:#9fb3a3;font-size:12.5px;margin-top:18px;font-weight:600">{{ logistics.customs_title }}</p>
-      <div class="inco" style="margin-top:10px">
-        {% for c in logistics.customs %}<b style="font-size:12px;padding:8px 12px">{{ c }}</b>{% endfor %}
+      <div class="inco" data-stagger style="margin-top:10px">
+        {% for c in logistics.customs %}<b style="font-size:12px;padding:8px 12px;--d:{{ "%.2f"|format(loop.index0 * 0.06) }}s">{{ c }}</b>{% endfor %}
       </div>
       <p class="mk-note">{{ logistics.customs_note }}</p>
     </div>
-    <div class="mk-list rv">
+    <div class="mk-list" data-stagger>
       {% for m in logistics.markets %}
-      <div class="m"><h3>{{ flag_svgs[m.code] | safe }} {{ m.name }}</h3>{% if m.tag %}<span>{{ m.tag }}</span>{% endif %}</div>
+      <div class="m" style="--d:{{ "%.2f"|format(loop.index0 * 0.08) }}s"><h3>{{ flag_svgs[m.code] | safe }} {{ m.name }}</h3>{% if m.tag %}<span>{{ m.tag }}</span>{% endif %}</div>
       {% endfor %}
     </div>
   </div>

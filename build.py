@@ -107,6 +107,13 @@ def copy_hero_video(out_dir: Path) -> str | None:
     return None
 
 
+def has_alpha(path: Path) -> bool:
+    if path.suffix.lower() not in (".png", ".webp"):
+        return False
+    with Image.open(path) as im:
+        return im.mode in ("RGBA", "LA") or "transparency" in im.info
+
+
 def copy_images(out_dir: Path) -> dict:
     """
     Сжимает фото (Pillow) и копирует как отдельные JPEG-файлы в
@@ -126,10 +133,11 @@ def copy_images(out_dir: Path) -> dict:
         if not f.is_file() or f.name.startswith("."):
             continue
         key = translit(f.stem)
-        if f.suffix.lower() in (".jpg", ".jpeg", ".png", ".webp"):
+        if f.suffix.lower() in (".jpg", ".jpeg", ".png", ".webp") and not has_alpha(f):
             data = compressed_jpeg_bytes(f)
             dest = assets_dir / f"{key}.jpg"
         else:
+            # прозрачные PNG/WEBP (напр. чеснок) отдаём как есть, иначе JPEG зальёт фон
             data = f.read_bytes()
             dest = assets_dir / f"{key}{f.suffix.lower()}"
         dest.write_bytes(data)
@@ -218,7 +226,11 @@ def main():
         shutil.rmtree(DIST)
 
     css = (STATIC / "css" / "main.css").read_text(encoding="utf-8")
-    js = (STATIC / "js" / "main.js").read_text(encoding="utf-8")
+    # порядок важен: Lenis (локально, без CDN) -> анимации -> hero WebGL -> main
+    js = "\n\n".join(
+        (STATIC / "js" / name).read_text(encoding="utf-8")
+        for name in ("lenis.min.js", "anim.js", "hero-gl.js", "main.js")
+    )
     fonts_css = build_fonts_css()
     fonts_present = bool(fonts_css)
 

@@ -1,4 +1,4 @@
-<!-- SPEC -->
+{# SPEC #}
 {% set pack_icons = [
   '<svg class="pk-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg>',
   '<svg class="pk-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7l9-4 9 4-9 4z"/><path d="M3 7v10l9 4 9-4V7"/></svg>',
@@ -15,15 +15,18 @@
     <p>{{ specs.intro }}</p>
   </div>
   <div class="spec-panel rv">
-    <div class="spec-rows">
+    {# строки характеристик выезжают по очереди #}
+    <div class="spec-rows" data-stagger>
       {% for r in specs.rows %}
-      <div class="spec-row"><span class="k">{{ r.k }}</span><span class="v">{{ r.v }}</span></div>
+      <div class="spec-row" style="--d:{{ "%.2f"|format(loop.index0 * 0.05) }}s"><span class="k">{{ r.k }}</span><span class="v">{{ r.v }}</span></div>
       {% endfor %}
     </div>
     <div class="spec-side">
       {% set ssrc = img(specs.side.photo) %}
       {% if ssrc %}
-      <img class="spec-img" src="{{ ssrc }}" alt="" style="object-position:{{ specs.side.pos | default('center') }}">
+      <div class="spec-shot mask-rv on-dark">
+        <img class="spec-img" src="{{ ssrc }}" alt="" data-px="8" style="object-position:{{ specs.side.pos | default('center') }}">
+      </div>
       {% else %}
       <div class="spec-img" style="background:#e8ede9;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:#7a9a7a;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:500;letter-spacing:.05em;border:1.5px dashed #b8cdb8;box-sizing:border-box"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" style="opacity:.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>{{ specs.side.hint }}</div>
       {% endif %}
@@ -33,7 +36,8 @@
           <div class="num-badge">{{ b.num }}<span>{{ b.unit }}</span></div>
           {% endfor %}
         </div>
-        <div class="spec-big">{{ specs.side.big }}<small>{{ specs.side.big_unit }}</small></div>
+        {# крупная цифра досчитывается: класс .num ловит счётчик #}
+        <div class="spec-big"><span class="num">{{ specs.side.big }}</span><small>{{ specs.side.big_unit }}</small></div>
         <div class="spec-sub">{{ specs.side.big_sub }}</div>
         <div class="cal">
           {% for c in specs.side.caliber %}
@@ -44,36 +48,38 @@
     </div>
   </div>
 
-  <!-- caliber photo gallery -->
-  <div class="cal-strip rv" style="margin-top:36px">
+  {# caliber photo gallery — у каждого кадра своя шторка и параллакс #}
+  <div class="cal-strip" data-stagger style="margin-top:36px">
     {% for g in specs.gallery %}
-    <div class="cs-item">
+    <div class="cs-item mask-rv on-dark" style="--d:{{ "%.2f"|format(loop.index0 * 0.08) }}s">
       {% set gsrc = img(g.photo) %}
       {% if gsrc %}
-      <img src="{{ gsrc }}" alt="" style="object-position:{{ g.pos | default('center') }}">
+      <img src="{{ gsrc }}" alt="" data-px="7" style="object-position:{{ g.pos | default('center') }}">
       {% else %}
-      <div style="background:#e8ede9;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:#7a9a7a;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:500;letter-spacing:.05em;border:1.5px dashed #b8cdb8;box-sizing:border-box"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" style="opacity:.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>{{ g.hint }}</div>
+      <div style="background:#e8ede9;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:#7a9a7a;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:500;letter-spacing:.05em;border:1.5px dashed #b8cdb8;box-sizing:border-box;height:100%"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" style="opacity:.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>{{ g.hint }}</div>
       {% endif %}
-      <div class="cs-label">{{ g.label }}</div>
+      <div class="cs-label" style="z-index:4">{{ g.label }}</div>
     </div>
     {% endfor %}
   </div>
 
-  <!-- packaging -->
+  {# packaging #}
   <div style="margin-top:48px" class="rv">
     <span class="eyebrow" style="margin-bottom:20px;display:flex">{{ specs.packaging.eyebrow }}</span>
-    <div class="pack-grid" style="margin-top:20px">
+    <div class="pack-grid" data-stagger style="margin-top:20px">
       {% for p in specs.packaging['items'] %}
-      <div class="pk">{{ pack_icons[loop.index0] | safe }}<b>{{ p.name }}</b><span>{{ p.spec }}</span></div>
+      <div class="pk" style="--d:{{ "%.2f"|format(loop.index0 * 0.07) }}s">{{ pack_icons[loop.index0] | safe }}<b>{{ p.name }}</b><span>{{ p.spec }}</span></div>
       {% endfor %}
     </div>
-    <div class="pack-photos rv">
+    <div class="pack-photos">
       {% for ph in specs.packaging.photos %}
       {% set psrc = img(ph.photo) %}
       {% if psrc %}
-      <img src="{{ psrc }}" alt="" style="object-position:{{ ph.pos | default('center') }}">
+      <div class="pk-shot mask-rv">
+        <img src="{{ psrc }}" alt="" data-px="9" style="object-position:{{ ph.pos | default('center') }}">
+      </div>
       {% else %}
-      <div style="background:#e8ede9;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:#7a9a7a;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:500;letter-spacing:.05em;border:1.5px dashed #b8cdb8;box-sizing:border-box"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" style="opacity:.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>{{ ph.hint }}</div>
+      <div style="background:#e8ede9;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:#7a9a7a;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:500;letter-spacing:.05em;border:1.5px dashed #b8cdb8;box-sizing:border-box;height:280px"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" style="opacity:.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>{{ ph.hint }}</div>
       {% endif %}
       {% endfor %}
     </div>

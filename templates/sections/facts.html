@@ -1,8 +1,11 @@
-<!-- quick facts -->
+{# QUICK FACTS — цифры досчитываются вверх при появлении (JS ловит .num) #}
 <div class="facts-bar">
-  <div class="wrap facts-inner">
+  <div class="wrap facts-inner" data-stagger>
     {% for f in facts %}
-    <div class="stat"><div class="num">{{ f.num }}</div><div class="lbl">{{ f.label }}</div></div>
+    <div class="stat" style="--d:{{ "%.2f"|format(loop.index0 * 0.08) }}s">
+      <div class="num">{{ f.num }}</div>
+      <div class="lbl">{{ f.label }}</div>
+    </div>
     {% endfor %}
   </div>
 </div>

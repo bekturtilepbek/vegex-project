@@ -1,4 +1,4 @@
-<!-- CATEGORIES — направления, которые появятся позже -->
+{# CATEGORIES — направления, которые появятся позже #}
 <section style="background:var(--paper2)">
 <div class="wrap">
   <div class="sec-head rv">
@@ -7,9 +7,9 @@
     <div class="grad-line"></div>
     <p>{{ categories.intro }}</p>
   </div>
-  <div class="prod-grid rv">
+  <div class="prod-grid" data-stagger>
     {% for c in categories.cards %}
-    <div class="prod-card">
+    <div class="prod-card" style="--d:{{ "%.2f"|format(loop.index0 * 0.09) }}s">
       {% set src = img(c.photo) %}
       {% if src %}
       <div class="ph" style="background:#0e1b12 url('{{ src }}') center/cover"></div>

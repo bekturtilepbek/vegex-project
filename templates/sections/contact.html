@@ -1,17 +1,17 @@
-<!-- CTA -->
+{# CTA / CONTACT #}
 <div class="cta" id="contact">
 <div class="wrap cta-g">
   <div class="rv">
     <span class="eyebrow" style="color:rgba(255,255,255,.7)">{{ contact.eyebrow }}</span>
     <h2 style="margin-top:14px">{{ contact.title }}</h2>
     <p class="lead">{{ contact.lead }}</p>
-    <div class="cline">
-      <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="flex-shrink:0"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.5-7 8-7s8 3 8 7"/></svg> <div>{{ contacts.ceo }}<div class="role">{{ contacts.ceo_role }}</div></div></div>
-      <a href="tel:{{ contacts.phone_raw }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="flex-shrink:0"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 015 5 2 2 0 015 4z"/></svg> {{ contacts.phone }}</a>
-      <a href="mailto:{{ contacts.email }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="flex-shrink:0"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg> {{ contacts.email }}</a>
+    <div class="cline" data-stagger>
+      <div style="--d:.06s"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="flex-shrink:0"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.5-7 8-7s8 3 8 7"/></svg> <div>{{ contacts.ceo }}<div class="role">{{ contacts.ceo_role }}</div></div></div>
+      <a href="tel:{{ contacts.phone_raw }}" style="--d:.14s"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="flex-shrink:0"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 015 5 2 2 0 015 4z"/></svg> {{ contacts.phone }}</a>
+      <a href="mailto:{{ contacts.email }}" style="--d:.22s"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="flex-shrink:0"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg> {{ contacts.email }}</a>
     </div>
   </div>
-  <div class="form rv">
+  <div class="form rv" style="transition-delay:.15s">
     <h3>{{ contact.form.title }}</h3>
     <p class="fs">{{ contact.form.subtitle }}</p>
     <form id="lead-form" data-wa="{{ contacts.whatsapp_raw }}"
