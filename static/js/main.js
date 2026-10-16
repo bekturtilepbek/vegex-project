@@ -40,7 +40,8 @@ if (leadForm) {
     const company = (data.get('company') || '').trim();
     if (company) lines.push(`Компания: ${company}`);
     const phone = (data.get('phone') || '').trim();
-    if (phone) lines.push(`Телефон: ${phone}`);
+    const cc = (data.get('cc') || '').trim();
+    if (phone) lines.push(`Телефон: ${cc && !phone.startsWith('+') ? cc + ' ' : ''}${phone}`);
     const message = (data.get('message') || '').trim();
     if (message) lines.push(`Сообщение: ${message}`);
     if (status) { status.textContent = leadForm.dataset.opening; status.dataset.state = 'ok'; }
@@ -48,6 +49,39 @@ if (leadForm) {
     window.open(url, '_blank', 'noopener');
   });
 }
+
+/* --- выбор кода страны у телефона: кастомный listbox (SVG-флаги) --- */
+document.querySelectorAll('[data-cc]').forEach((box) => {
+  const btn = box.querySelector('.cc-btn');
+  const list = box.querySelector('.cc-list');
+  const cur = box.querySelector('.cc-cur');
+  const hidden = box.querySelector('input[name="cc"]');
+  const tel = box.querySelector('input[type="tel"]');
+  const opts = [...list.querySelectorAll('[role="option"]')];
+  const toggle = (open) => {
+    list.hidden = !open;
+    btn.setAttribute('aria-expanded', open);
+    if (open) (opts.find(o => o.getAttribute('aria-selected') === 'true') || opts[0]).focus();
+  };
+  const pick = (o) => {
+    opts.forEach(x => x.setAttribute('aria-selected', x === o));
+    const dial = o.dataset.dial;
+    hidden.value = dial;
+    cur.innerHTML = o.querySelector('svg').outerHTML + `<b>${dial || '+'}</b>`;
+    tel.placeholder = dial ? box.dataset.ph : box.dataset.phOther;
+    toggle(false);
+    tel.focus();
+  };
+  btn.addEventListener('click', () => toggle(list.hidden));
+  opts.forEach(o => o.addEventListener('click', () => pick(o)));
+  list.addEventListener('keydown', (e) => {
+    const i = opts.indexOf(document.activeElement);
+    if (e.key === 'ArrowDown') { e.preventDefault(); opts[Math.min(i + 1, opts.length - 1)].focus(); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); opts[Math.max(i - 1, 0)].focus(); }
+    else if (e.key === 'Escape' || e.key === 'Tab') { toggle(false); if (e.key === 'Escape') btn.focus(); }
+  });
+  document.addEventListener('click', (e) => { if (!box.contains(e.target)) toggle(false); });
+});
 
 /* --- бургер-меню: показать/скрыть навигацию на мобильных --- */
 const burger = document.querySelector('.burger');

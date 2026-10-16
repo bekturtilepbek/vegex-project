@@ -251,6 +251,24 @@ section{padding:96px 0}
 .field label{display:block;font-size:12.5px;font-weight:600;color:#3a4a40;margin-bottom:6px}
 .field input,.field textarea{width:100%;padding:11px 13px;border:1.5px solid var(--line);border-radius:3px;font-family:inherit;font-size:14px;color:var(--ink);background:var(--paper);resize:vertical}
 .field input:focus,.field textarea:focus{outline:none;border-color:var(--gd)}
+/* телефон: выбор кода страны (кастомный список — SVG-флаги вместо emoji) */
+.tel-g{position:relative;display:flex}
+.tel-g input[type=tel]{border-radius:0 3px 3px 0;min-width:0}
+.cc-btn{display:flex;align-items:center;gap:6px;flex-shrink:0;padding:0 10px 0 12px;border:1.5px solid var(--line);border-right:none;border-radius:3px 0 0 3px;background:var(--paper2);font-family:inherit;font-size:14px;color:var(--ink);cursor:pointer}
+.cc-btn:hover,.cc-btn[aria-expanded=true]{background:#e6e1d3}
+.cc-btn:focus-visible{outline:2px solid var(--gd);outline-offset:-2px}
+.cc-cur{display:flex;align-items:center;gap:7px}
+.cc-cur b{font-weight:600;min-width:2.4em}
+.cc-chev{opacity:.55;transition:transform .2s}
+.cc-btn[aria-expanded=true] .cc-chev{transform:rotate(180deg)}
+.cc-flag{display:block;flex-shrink:0;border-radius:2px;box-shadow:0 0 0 1px rgba(20,38,26,.12)}
+.cc-list{position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:20;max-height:264px;overflow-y:auto;margin:0;padding:4px 0;list-style:none;background:#fff;border:1px solid var(--line);border-radius:4px;box-shadow:0 12px 32px rgba(14,27,18,.16)}
+.cc-list[hidden]{display:none}
+.cc-list button{display:flex;align-items:center;gap:10px;width:100%;padding:8px 12px;border:none;background:none;font-family:inherit;font-size:13.5px;color:var(--ink);text-align:left;cursor:pointer}
+.cc-list button:hover,.cc-list button:focus{outline:none;background:var(--paper)}
+.cc-list button[aria-selected=true]{background:var(--paper2);font-weight:600}
+.cc-n{flex:1}
+.cc-d{color:var(--stone);font-variant-numeric:tabular-nums}
 .or-div{display:flex;align-items:center;gap:12px;margin:18px 0;color:var(--stone);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
 .or-div::before,.or-div::after{content:"";flex:1;height:1px;background:var(--line)}
 

@@ -1,4 +1,30 @@
 {# CTA / CONTACT #}
+{# SVG-флаги для выбора кода страны (emoji-флаги не рендерятся на Windows) #}
+{% set cc_flags = {
+  'de': '<rect width="30" height="6.67" fill="#000"/><rect width="30" height="6.67" y="6.67" fill="#DD0000"/><rect width="30" height="6.67" y="13.33" fill="#FFCE00"/>',
+  'pl': '<rect width="30" height="10" fill="#fff"/><rect width="30" height="10" y="10" fill="#DC143C"/>',
+  'nl': '<rect width="30" height="6.67" fill="#AE1C28"/><rect width="30" height="6.67" y="6.67" fill="#fff"/><rect width="30" height="6.67" y="13.33" fill="#21468B"/>',
+  'at': '<rect width="30" height="20" fill="#ED2939"/><rect width="30" height="6.67" y="6.67" fill="#fff"/>',
+  'cz': '<rect width="30" height="10" fill="#fff"/><rect width="30" height="10" y="10" fill="#D7141A"/><path d="M0 0l15 10L0 20z" fill="#11457E"/>',
+  'lt': '<rect width="30" height="6.67" fill="#FDB913"/><rect width="30" height="6.67" y="6.67" fill="#006A44"/><rect width="30" height="6.67" y="13.33" fill="#C1272D"/>',
+  'lv': '<rect width="30" height="20" fill="#9E3039"/><rect width="30" height="4" y="8" fill="#fff"/>',
+  'ee': '<rect width="30" height="6.67" fill="#0072CE"/><rect width="30" height="6.67" y="6.67" fill="#000"/><rect width="30" height="6.67" y="13.33" fill="#fff"/>',
+  'fr': '<rect width="10" height="20" fill="#002395"/><rect width="10" height="20" x="10" fill="#fff"/><rect width="10" height="20" x="20" fill="#ED2939"/>',
+  'it': '<rect width="10" height="20" fill="#009246"/><rect width="10" height="20" x="10" fill="#fff"/><rect width="10" height="20" x="20" fill="#CE2B37"/>',
+  'es': '<rect width="30" height="20" fill="#AA151B"/><rect width="30" height="10" y="5" fill="#F1BF00"/>',
+  'gb': '<rect width="30" height="20" fill="#012169"/><path d="M0 0l30 20M30 0L0 20" stroke="#fff" stroke-width="4"/><path d="M0 0l30 20M30 0L0 20" stroke="#C8102E" stroke-width="1.4"/><path d="M15 0v20M0 10h30" stroke="#fff" stroke-width="6"/><path d="M15 0v20M0 10h30" stroke="#C8102E" stroke-width="3.4"/>',
+  'tr': '<rect width="30" height="20" fill="#E30A17"/><circle cx="12.5" cy="10" r="5" fill="#fff"/><circle cx="14" cy="10" r="4" fill="#E30A17"/><path d="M17 10l4.7-1.5-2.9 4-2.9-4L20.5 10z" fill="#fff"/>',
+  'ae': '<rect width="30" height="20" fill="#00732F"/><rect width="30" height="6.67" y="6.67" fill="#fff"/><rect width="30" height="6.67" y="13.33" fill="#000"/><rect width="8" height="20" fill="#FF0000"/>',
+  'ma': '<rect width="30" height="20" fill="#C1272D"/><path d="M15 6l1.5 4.6h4.9l-4 2.9 1.5 4.6-4-2.9-4 2.9 1.5-4.6-4-2.9h4.9z" fill="none" stroke="#006233" stroke-width="1"/>',
+  'mn': '<rect width="10" height="20" fill="#C4272F"/><rect width="10" height="20" x="10" fill="#1B4E97"/><rect width="10" height="20" x="20" fill="#C4272F"/>',
+  'kg': '<rect width="30" height="20" fill="#E8112D"/><circle cx="15" cy="10" r="5.5" fill="#FFEF00"/><circle cx="15" cy="10" r="3" fill="#E8112D"/><circle cx="15" cy="10" r="2.2" fill="#FFEF00"/>',
+  'kz': '<rect width="30" height="20" fill="#00AFCA"/><circle cx="15" cy="9" r="3.6" fill="#FEC50C"/><path d="M10 14.5q5 2.4 10 0" fill="none" stroke="#FEC50C" stroke-width="1.2"/>',
+  'uz': '<rect width="30" height="6.67" fill="#0099B5"/><rect width="30" height="6.67" y="6.67" fill="#fff"/><rect width="30" height="6.67" y="13.33" fill="#1EB53A"/><rect width="30" height=".6" y="6.37" fill="#CE1126"/><rect width="30" height=".6" y="13.03" fill="#CE1126"/>',
+  'ru': '<rect width="30" height="6.67" fill="#fff"/><rect width="30" height="6.67" y="6.67" fill="#0039A6"/><rect width="30" height="6.67" y="13.33" fill="#D52B1E"/>',
+  'other': '<rect width="30" height="20" fill="#EFEBE0"/><g fill="none" stroke="#8A8579" stroke-width="1.2"><circle cx="15" cy="10" r="6.5"/><path d="M8.5 10h13M15 3.5c-3.2 3.6-3.2 9.4 0 13M15 3.5c3.2 3.6 3.2 9.4 0 13"/></g>'
+} %}
+{% macro cc_flag(code) %}<svg class="cc-flag" width="22" height="15" viewBox="0 0 30 20" aria-hidden="true">{{ cc_flags[code] | safe }}</svg>{% endmacro %}
+{% set cc0 = contact.form.phone_countries[0] %}
 <div class="cta" id="contact">
 <div class="wrap cta-g">
   <div class="rv">
@@ -26,7 +52,19 @@
       </div>
       <div class="field">
         <label for="lf-phone">{{ contact.form.phone_label }}</label>
-        <input id="lf-phone" type="tel" name="phone" placeholder="{{ contact.form.phone_placeholder }}">
+        <div class="tel-g" data-cc data-ph="{{ contact.form.phone_placeholder }}" data-ph-other="{{ contact.form.phone_other_placeholder }}">
+          <button type="button" class="cc-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="{{ contact.form.cc_label }}">
+            <span class="cc-cur">{{ cc_flag(cc0.code) }}<b>{{ cc0.dial }}</b></span>
+            <svg class="cc-chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5L5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+          </button>
+          <ul class="cc-list" role="listbox" aria-label="{{ contact.form.cc_label }}" hidden>
+            {% for c in contact.form.phone_countries %}
+            <li><button type="button" role="option" data-dial="{{ c.dial }}" aria-selected="{{ 'true' if loop.first else 'false' }}">{{ cc_flag(c.code) }}<span class="cc-n">{{ c.name }}</span><span class="cc-d">{{ c.dial }}</span></button></li>
+            {% endfor %}
+          </ul>
+          <input type="hidden" name="cc" value="{{ cc0.dial }}">
+          <input id="lf-phone" type="tel" name="phone" inputmode="tel" autocomplete="tel-national" placeholder="{{ contact.form.phone_placeholder }}">
+        </div>
       </div>
       <div class="field">
         <label for="lf-message">{{ contact.form.message_label }}</label>
