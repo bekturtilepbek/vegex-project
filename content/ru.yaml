@@ -206,7 +206,7 @@ contact:
     cc_empty: "Ничего не найдено"
     # Полный список стран — content/countries.yaml. Здесь — популярные
     # (показываются сверху списка); первая — значение по умолчанию.
-    phone_top: [de, pl, nl, at, cz, lt, lv, ee, fr, it, es, gb, tr, ae, kg, kz]
+    phone_top: [kg, de, pl, nl, at, cz, lt, lv, ee, fr, it, es, gb, tr, ae, kz]
     message_label: "Сообщение"
     message_placeholder: "Объём партии, сроки, вопросы..."
     submit: "Отправить →"
