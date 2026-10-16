@@ -175,6 +175,41 @@ def build_fonts_css() -> str:
     return "\n".join(blocks)
 
 
+FLAG_FONT = STATIC / "fonts" / "TwemojiCountryFlags.woff2"
+
+
+def copy_flag_font(out_dir: Path) -> str:
+    """Шрифт emoji-флагов (Twemoji Country Flags, CC-BY 4.0, из
+    country-flag-emoji-polyfill) — Windows не рисует флаги-emoji сама.
+    Отдельным файлом: благодаря unicode-range браузер качает его, только
+    когда на странице реально показаны флаги (список кодов телефона)."""
+    if not FLAG_FONT.exists():
+        return ""
+    dest = out_dir / "assets" / "fonts" / FLAG_FONT.name
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(FLAG_FONT, dest)
+    return (
+        "/* Twemoji Country Flags — graphics (c) Twitter, Inc., CC-BY 4.0 */\n"
+        "@font-face{font-family:'Twemoji Country Flags';font-display:swap;"
+        f"src:url(assets/fonts/{FLAG_FONT.name}) format('woff2');"
+        "unicode-range:U+1F1E6-1F1FF,U+1F3F4,U+E0062-E0063,U+E0065,U+E0067,"
+        "U+E006C,U+E006E,U+E0073-E0074,U+E0077,U+E007F}"
+    )
+
+
+def flag_emoji(code: str) -> str:
+    # ISO-код страны -> пара regional indicator символов (emoji-флаг)
+    return "".join(chr(0x1F1E6 + ord(c) - ord("a")) for c in code.lower())
+
+
+def load_countries() -> list:
+    path = CONTENT / "countries.yaml"
+    if not path.exists():
+        return []
+    with path.open(encoding="utf-8") as fh:
+        return (yaml.safe_load(fh) or {}).get("countries", [])
+
+
 def load_content(lang: str) -> dict:
     path = CONTENT / f"{lang}.yaml"
     if not path.exists():
@@ -184,12 +219,14 @@ def load_content(lang: str) -> dict:
 
 
 def make_env() -> Environment:
-    return Environment(
+    env = Environment(
         loader=FileSystemLoader(str(TEMPLATES)),
         autoescape=False,
         trim_blocks=True,
         lstrip_blocks=True,
     )
+    env.filters["flag"] = flag_emoji
+    return env
 
 
 def render_lang(env, lang, css, js, fonts_css, fonts_present):
@@ -198,6 +235,7 @@ def render_lang(env, lang, css, js, fonts_css, fonts_present):
     out_dir.mkdir(parents=True, exist_ok=True)
     hero_video = copy_hero_video(out_dir)
     images = copy_images(out_dir)
+    flag_font_css = copy_flag_font(out_dir)
 
     def img(key: str):
         if not key:
@@ -212,7 +250,8 @@ def render_lang(env, lang, css, js, fonts_css, fonts_present):
         "langs": LANGS,
         "css_inline": css,
         "js_inline": js,
-        "fonts_css_inline": fonts_css,
+        "fonts_css_inline": fonts_css + "\n" + flag_font_css,
+        "countries": load_countries(),
         "fonts_inlined": fonts_present,
         "hero_video": hero_video,
     })

@@ -1,0 +1,249 @@
+# Справочник стран для выбора кода телефона (контакт-форма).
+# Сгенерирован из CLDR (названия ru/en) и libphonenumber (коды) — правится руками при необходимости.
+# code — ISO 3166-1 alpha-2 (из него строится emoji-флаг), dial — телефонный код без «+».
+countries:
+  - { code: "au", dial: "61", ru: "Австралия", en: "Australia" }
+  - { code: "at", dial: "43", ru: "Австрия", en: "Austria" }
+  - { code: "az", dial: "994", ru: "Азербайджан", en: "Azerbaijan" }
+  - { code: "ax", dial: "358", ru: "Аландские о-ва", en: "Åland Islands" }
+  - { code: "al", dial: "355", ru: "Албания", en: "Albania" }
+  - { code: "dz", dial: "213", ru: "Алжир", en: "Algeria" }
+  - { code: "as", dial: "1", ru: "Американское Самоа", en: "American Samoa" }
+  - { code: "ai", dial: "1", ru: "Ангилья", en: "Anguilla" }
+  - { code: "ao", dial: "244", ru: "Ангола", en: "Angola" }
+  - { code: "ad", dial: "376", ru: "Андорра", en: "Andorra" }
+  - { code: "ag", dial: "1", ru: "Антигуа и Барбуда", en: "Antigua & Barbuda" }
+  - { code: "ar", dial: "54", ru: "Аргентина", en: "Argentina" }
+  - { code: "am", dial: "374", ru: "Армения", en: "Armenia" }
+  - { code: "aw", dial: "297", ru: "Аруба", en: "Aruba" }
+  - { code: "af", dial: "93", ru: "Афганистан", en: "Afghanistan" }
+  - { code: "bs", dial: "1", ru: "Багамы", en: "Bahamas" }
+  - { code: "bd", dial: "880", ru: "Бангладеш", en: "Bangladesh" }
+  - { code: "bb", dial: "1", ru: "Барбадос", en: "Barbados" }
+  - { code: "bh", dial: "973", ru: "Бахрейн", en: "Bahrain" }
+  - { code: "by", dial: "375", ru: "Беларусь", en: "Belarus" }
+  - { code: "bz", dial: "501", ru: "Белиз", en: "Belize" }
+  - { code: "be", dial: "32", ru: "Бельгия", en: "Belgium" }
+  - { code: "bj", dial: "229", ru: "Бенин", en: "Benin" }
+  - { code: "bm", dial: "1", ru: "Бермудские о-ва", en: "Bermuda" }
+  - { code: "bg", dial: "359", ru: "Болгария", en: "Bulgaria" }
+  - { code: "bo", dial: "591", ru: "Боливия", en: "Bolivia" }
+  - { code: "bq", dial: "599", ru: "Бонэйр, Синт-Эстатиус и Саба", en: "Caribbean Netherlands" }
+  - { code: "ba", dial: "387", ru: "Босния и Герцеговина", en: "Bosnia & Herzegovina" }
+  - { code: "bw", dial: "267", ru: "Ботсвана", en: "Botswana" }
+  - { code: "br", dial: "55", ru: "Бразилия", en: "Brazil" }
+  - { code: "io", dial: "246", ru: "Британская территория в Индийском океане", en: "British Indian Ocean Territory" }
+  - { code: "bn", dial: "673", ru: "Бруней", en: "Brunei" }
+  - { code: "bf", dial: "226", ru: "Буркина-Фасо", en: "Burkina Faso" }
+  - { code: "bi", dial: "257", ru: "Бурунди", en: "Burundi" }
+  - { code: "bt", dial: "975", ru: "Бутан", en: "Bhutan" }
+  - { code: "vu", dial: "678", ru: "Вануату", en: "Vanuatu" }
+  - { code: "va", dial: "39", ru: "Ватикан", en: "Vatican City" }
+  - { code: "gb", dial: "44", ru: "Великобритания", en: "United Kingdom" }
+  - { code: "hu", dial: "36", ru: "Венгрия", en: "Hungary" }
+  - { code: "ve", dial: "58", ru: "Венесуэла", en: "Venezuela" }
+  - { code: "vg", dial: "1", ru: "Виргинские о-ва (Великобритания)", en: "British Virgin Islands" }
+  - { code: "vi", dial: "1", ru: "Виргинские о-ва (США)", en: "U.S. Virgin Islands" }
+  - { code: "tl", dial: "670", ru: "Восточный Тимор", en: "Timor-Leste" }
+  - { code: "vn", dial: "84", ru: "Вьетнам", en: "Vietnam" }
+  - { code: "ga", dial: "241", ru: "Габон", en: "Gabon" }
+  - { code: "ht", dial: "509", ru: "Гаити", en: "Haiti" }
+  - { code: "gy", dial: "592", ru: "Гайана", en: "Guyana" }
+  - { code: "gm", dial: "220", ru: "Гамбия", en: "Gambia" }
+  - { code: "gh", dial: "233", ru: "Гана", en: "Ghana" }
+  - { code: "gp", dial: "590", ru: "Гваделупа", en: "Guadeloupe" }
+  - { code: "gt", dial: "502", ru: "Гватемала", en: "Guatemala" }
+  - { code: "gn", dial: "224", ru: "Гвинея", en: "Guinea" }
+  - { code: "gw", dial: "245", ru: "Гвинея-Бисау", en: "Guinea-Bissau" }
+  - { code: "de", dial: "49", ru: "Германия", en: "Germany" }
+  - { code: "gg", dial: "44", ru: "Гернси", en: "Guernsey" }
+  - { code: "gi", dial: "350", ru: "Гибралтар", en: "Gibraltar" }
+  - { code: "hn", dial: "504", ru: "Гондурас", en: "Honduras" }
+  - { code: "hk", dial: "852", ru: "Гонконг (САР)", en: "Hong Kong SAR China" }
+  - { code: "gd", dial: "1", ru: "Гренада", en: "Grenada" }
+  - { code: "gl", dial: "299", ru: "Гренландия", en: "Greenland" }
+  - { code: "gr", dial: "30", ru: "Греция", en: "Greece" }
+  - { code: "ge", dial: "995", ru: "Грузия", en: "Georgia" }
+  - { code: "gu", dial: "1", ru: "Гуам", en: "Guam" }
+  - { code: "dk", dial: "45", ru: "Дания", en: "Denmark" }
+  - { code: "je", dial: "44", ru: "Джерси", en: "Jersey" }
+  - { code: "dj", dial: "253", ru: "Джибути", en: "Djibouti" }
+  - { code: "dm", dial: "1", ru: "Доминика", en: "Dominica" }
+  - { code: "do", dial: "1", ru: "Доминиканская Республика", en: "Dominican Republic" }
+  - { code: "eg", dial: "20", ru: "Египет", en: "Egypt" }
+  - { code: "zm", dial: "260", ru: "Замбия", en: "Zambia" }
+  - { code: "eh", dial: "212", ru: "Западная Сахара", en: "Western Sahara" }
+  - { code: "zw", dial: "263", ru: "Зимбабве", en: "Zimbabwe" }
+  - { code: "il", dial: "972", ru: "Израиль", en: "Israel" }
+  - { code: "in", dial: "91", ru: "Индия", en: "India" }
+  - { code: "id", dial: "62", ru: "Индонезия", en: "Indonesia" }
+  - { code: "jo", dial: "962", ru: "Иордания", en: "Jordan" }
+  - { code: "iq", dial: "964", ru: "Ирак", en: "Iraq" }
+  - { code: "ir", dial: "98", ru: "Иран", en: "Iran" }
+  - { code: "ie", dial: "353", ru: "Ирландия", en: "Ireland" }
+  - { code: "is", dial: "354", ru: "Исландия", en: "Iceland" }
+  - { code: "es", dial: "34", ru: "Испания", en: "Spain" }
+  - { code: "it", dial: "39", ru: "Италия", en: "Italy" }
+  - { code: "ye", dial: "967", ru: "Йемен", en: "Yemen" }
+  - { code: "kp", dial: "850", ru: "Северная Корея", en: "North Korea" }
+  - { code: "cv", dial: "238", ru: "Кабо-Верде", en: "Cape Verde" }
+  - { code: "kz", dial: "7", ru: "Казахстан", en: "Kazakhstan" }
+  - { code: "kh", dial: "855", ru: "Камбоджа", en: "Cambodia" }
+  - { code: "cm", dial: "237", ru: "Камерун", en: "Cameroon" }
+  - { code: "ca", dial: "1", ru: "Канада", en: "Canada" }
+  - { code: "qa", dial: "974", ru: "Катар", en: "Qatar" }
+  - { code: "ke", dial: "254", ru: "Кения", en: "Kenya" }
+  - { code: "cy", dial: "357", ru: "Кипр", en: "Cyprus" }
+  - { code: "kg", dial: "996", ru: "Кыргызстан", en: "Kyrgyzstan" }
+  - { code: "ki", dial: "686", ru: "Кирибати", en: "Kiribati" }
+  - { code: "cn", dial: "86", ru: "Китай", en: "China" }
+  - { code: "cc", dial: "61", ru: "Кокосовые о-ва", en: "Cocos (Keeling) Islands" }
+  - { code: "co", dial: "57", ru: "Колумбия", en: "Colombia" }
+  - { code: "km", dial: "269", ru: "Коморы", en: "Comoros" }
+  - { code: "cg", dial: "242", ru: "Конго - Браззавиль", en: "Congo - Brazzaville" }
+  - { code: "cd", dial: "243", ru: "Конго - Киншаса", en: "Congo - Kinshasa" }
+  - { code: "xk", dial: "383", ru: "Косово", en: "Kosovo" }
+  - { code: "cr", dial: "506", ru: "Коста-Рика", en: "Costa Rica" }
+  - { code: "ci", dial: "225", ru: "Кот-д’Ивуар", en: "Côte d’Ivoire" }
+  - { code: "cu", dial: "53", ru: "Куба", en: "Cuba" }
+  - { code: "kw", dial: "965", ru: "Кувейт", en: "Kuwait" }
+  - { code: "cw", dial: "599", ru: "Кюрасао", en: "Curaçao" }
+  - { code: "la", dial: "856", ru: "Лаос", en: "Laos" }
+  - { code: "lv", dial: "371", ru: "Латвия", en: "Latvia" }
+  - { code: "ls", dial: "266", ru: "Лесото", en: "Lesotho" }
+  - { code: "lr", dial: "231", ru: "Либерия", en: "Liberia" }
+  - { code: "lb", dial: "961", ru: "Ливан", en: "Lebanon" }
+  - { code: "ly", dial: "218", ru: "Ливия", en: "Libya" }
+  - { code: "lt", dial: "370", ru: "Литва", en: "Lithuania" }
+  - { code: "li", dial: "423", ru: "Лихтенштейн", en: "Liechtenstein" }
+  - { code: "lu", dial: "352", ru: "Люксембург", en: "Luxembourg" }
+  - { code: "mu", dial: "230", ru: "Маврикий", en: "Mauritius" }
+  - { code: "mr", dial: "222", ru: "Мавритания", en: "Mauritania" }
+  - { code: "mg", dial: "261", ru: "Мадагаскар", en: "Madagascar" }
+  - { code: "yt", dial: "262", ru: "Майотта", en: "Mayotte" }
+  - { code: "mo", dial: "853", ru: "Макао (САР)", en: "Macao SAR China" }
+  - { code: "mw", dial: "265", ru: "Малави", en: "Malawi" }
+  - { code: "my", dial: "60", ru: "Малайзия", en: "Malaysia" }
+  - { code: "ml", dial: "223", ru: "Мали", en: "Mali" }
+  - { code: "mv", dial: "960", ru: "Мальдивы", en: "Maldives" }
+  - { code: "mt", dial: "356", ru: "Мальта", en: "Malta" }
+  - { code: "ma", dial: "212", ru: "Марокко", en: "Morocco" }
+  - { code: "mq", dial: "596", ru: "Мартиника", en: "Martinique" }
+  - { code: "mh", dial: "692", ru: "Маршалловы о-ва", en: "Marshall Islands" }
+  - { code: "mx", dial: "52", ru: "Мексика", en: "Mexico" }
+  - { code: "mz", dial: "258", ru: "Мозамбик", en: "Mozambique" }
+  - { code: "md", dial: "373", ru: "Молдова", en: "Moldova" }
+  - { code: "mc", dial: "377", ru: "Монако", en: "Monaco" }
+  - { code: "mn", dial: "976", ru: "Монголия", en: "Mongolia" }
+  - { code: "ms", dial: "1", ru: "Монтсеррат", en: "Montserrat" }
+  - { code: "mm", dial: "95", ru: "Мьянма (Бирма)", en: "Myanmar (Burma)" }
+  - { code: "na", dial: "264", ru: "Намибия", en: "Namibia" }
+  - { code: "nr", dial: "674", ru: "Науру", en: "Nauru" }
+  - { code: "np", dial: "977", ru: "Непал", en: "Nepal" }
+  - { code: "ne", dial: "227", ru: "Нигер", en: "Niger" }
+  - { code: "ng", dial: "234", ru: "Нигерия", en: "Nigeria" }
+  - { code: "nl", dial: "31", ru: "Нидерланды", en: "Netherlands" }
+  - { code: "ni", dial: "505", ru: "Никарагуа", en: "Nicaragua" }
+  - { code: "nu", dial: "683", ru: "Ниуэ", en: "Niue" }
+  - { code: "nz", dial: "64", ru: "Новая Зеландия", en: "New Zealand" }
+  - { code: "nc", dial: "687", ru: "Новая Каледония", en: "New Caledonia" }
+  - { code: "no", dial: "47", ru: "Норвегия", en: "Norway" }
+  - { code: "ae", dial: "971", ru: "ОАЭ", en: "United Arab Emirates" }
+  - { code: "om", dial: "968", ru: "Оман", en: "Oman" }
+  - { code: "pk", dial: "92", ru: "Пакистан", en: "Pakistan" }
+  - { code: "pw", dial: "680", ru: "Палау", en: "Palau" }
+  - { code: "ps", dial: "970", ru: "Палестинские территории", en: "Palestinian Territories" }
+  - { code: "pa", dial: "507", ru: "Панама", en: "Panama" }
+  - { code: "pg", dial: "675", ru: "Папуа — Новая Гвинея", en: "Papua New Guinea" }
+  - { code: "py", dial: "595", ru: "Парагвай", en: "Paraguay" }
+  - { code: "pe", dial: "51", ru: "Перу", en: "Peru" }
+  - { code: "pl", dial: "48", ru: "Польша", en: "Poland" }
+  - { code: "pt", dial: "351", ru: "Португалия", en: "Portugal" }
+  - { code: "pr", dial: "1", ru: "Пуэрто-Рико", en: "Puerto Rico" }
+  - { code: "kr", dial: "82", ru: "Южная Корея", en: "South Korea" }
+  - { code: "re", dial: "262", ru: "Реюньон", en: "Réunion" }
+  - { code: "ru", dial: "7", ru: "Россия", en: "Russia" }
+  - { code: "rw", dial: "250", ru: "Руанда", en: "Rwanda" }
+  - { code: "ro", dial: "40", ru: "Румыния", en: "Romania" }
+  - { code: "sv", dial: "503", ru: "Сальвадор", en: "El Salvador" }
+  - { code: "ws", dial: "685", ru: "Самоа", en: "Samoa" }
+  - { code: "sm", dial: "378", ru: "Сан-Марино", en: "San Marino" }
+  - { code: "st", dial: "239", ru: "Сан-Томе и Принсипи", en: "São Tomé & Príncipe" }
+  - { code: "sa", dial: "966", ru: "Саудовская Аравия", en: "Saudi Arabia" }
+  - { code: "mk", dial: "389", ru: "Северная Македония", en: "North Macedonia" }
+  - { code: "mp", dial: "1", ru: "Северные Марианские о-ва", en: "Northern Mariana Islands" }
+  - { code: "sc", dial: "248", ru: "Сейшельские о-ва", en: "Seychelles" }
+  - { code: "bl", dial: "590", ru: "Сен-Бартелеми", en: "St. Barthélemy" }
+  - { code: "mf", dial: "590", ru: "Сен-Мартен", en: "St. Martin" }
+  - { code: "pm", dial: "508", ru: "Сен-Пьер и Микелон", en: "St. Pierre & Miquelon" }
+  - { code: "sn", dial: "221", ru: "Сенегал", en: "Senegal" }
+  - { code: "vc", dial: "1", ru: "Сент-Винсент и Гренадины", en: "St. Vincent & Grenadines" }
+  - { code: "kn", dial: "1", ru: "Сент-Китс и Невис", en: "St. Kitts & Nevis" }
+  - { code: "lc", dial: "1", ru: "Сент-Люсия", en: "St. Lucia" }
+  - { code: "rs", dial: "381", ru: "Сербия", en: "Serbia" }
+  - { code: "sg", dial: "65", ru: "Сингапур", en: "Singapore" }
+  - { code: "sx", dial: "1", ru: "Синт-Мартен", en: "Sint Maarten" }
+  - { code: "sy", dial: "963", ru: "Сирия", en: "Syria" }
+  - { code: "sk", dial: "421", ru: "Словакия", en: "Slovakia" }
+  - { code: "si", dial: "386", ru: "Словения", en: "Slovenia" }
+  - { code: "us", dial: "1", ru: "США", en: "United States" }
+  - { code: "sb", dial: "677", ru: "Соломоновы о-ва", en: "Solomon Islands" }
+  - { code: "so", dial: "252", ru: "Сомали", en: "Somalia" }
+  - { code: "sd", dial: "249", ru: "Судан", en: "Sudan" }
+  - { code: "sr", dial: "597", ru: "Суринам", en: "Suriname" }
+  - { code: "sl", dial: "232", ru: "Сьерра-Леоне", en: "Sierra Leone" }
+  - { code: "tj", dial: "992", ru: "Таджикистан", en: "Tajikistan" }
+  - { code: "th", dial: "66", ru: "Таиланд", en: "Thailand" }
+  - { code: "tw", dial: "886", ru: "Тайвань", en: "Taiwan" }
+  - { code: "tz", dial: "255", ru: "Танзания", en: "Tanzania" }
+  - { code: "tg", dial: "228", ru: "Того", en: "Togo" }
+  - { code: "tk", dial: "690", ru: "Токелау", en: "Tokelau" }
+  - { code: "to", dial: "676", ru: "Тонга", en: "Tonga" }
+  - { code: "tt", dial: "1", ru: "Тринидад и Тобаго", en: "Trinidad & Tobago" }
+  - { code: "ta", dial: "290", ru: "Тристан-да-Кунья", en: "Tristan da Cunha" }
+  - { code: "tv", dial: "688", ru: "Тувалу", en: "Tuvalu" }
+  - { code: "tn", dial: "216", ru: "Тунис", en: "Tunisia" }
+  - { code: "tm", dial: "993", ru: "Туркменистан", en: "Turkmenistan" }
+  - { code: "tr", dial: "90", ru: "Турция", en: "Türkiye" }
+  - { code: "tc", dial: "1", ru: "Тёркс и Кайкос", en: "Turks & Caicos Islands" }
+  - { code: "ug", dial: "256", ru: "Уганда", en: "Uganda" }
+  - { code: "uz", dial: "998", ru: "Узбекистан", en: "Uzbekistan" }
+  - { code: "ua", dial: "380", ru: "Украина", en: "Ukraine" }
+  - { code: "wf", dial: "681", ru: "Уоллис и Футуна", en: "Wallis & Futuna" }
+  - { code: "uy", dial: "598", ru: "Уругвай", en: "Uruguay" }
+  - { code: "fo", dial: "298", ru: "Фарерские о-ва", en: "Faroe Islands" }
+  - { code: "fm", dial: "691", ru: "Федеративные Штаты Микронезии", en: "Micronesia" }
+  - { code: "fj", dial: "679", ru: "Фиджи", en: "Fiji" }
+  - { code: "ph", dial: "63", ru: "Филиппины", en: "Philippines" }
+  - { code: "fi", dial: "358", ru: "Финляндия", en: "Finland" }
+  - { code: "fk", dial: "500", ru: "Фолклендские о-ва", en: "Falkland Islands" }
+  - { code: "fr", dial: "33", ru: "Франция", en: "France" }
+  - { code: "gf", dial: "594", ru: "Французская Гвиана", en: "French Guiana" }
+  - { code: "pf", dial: "689", ru: "Французская Полинезия", en: "French Polynesia" }
+  - { code: "hr", dial: "385", ru: "Хорватия", en: "Croatia" }
+  - { code: "cf", dial: "236", ru: "Центрально-Африканская Республика", en: "Central African Republic" }
+  - { code: "td", dial: "235", ru: "Чад", en: "Chad" }
+  - { code: "me", dial: "382", ru: "Черногория", en: "Montenegro" }
+  - { code: "cz", dial: "420", ru: "Чехия", en: "Czechia" }
+  - { code: "cl", dial: "56", ru: "Чили", en: "Chile" }
+  - { code: "ch", dial: "41", ru: "Швейцария", en: "Switzerland" }
+  - { code: "se", dial: "46", ru: "Швеция", en: "Sweden" }
+  - { code: "sj", dial: "47", ru: "Шпицберген и Ян-Майен", en: "Svalbard & Jan Mayen" }
+  - { code: "lk", dial: "94", ru: "Шри-Ланка", en: "Sri Lanka" }
+  - { code: "ec", dial: "593", ru: "Эквадор", en: "Ecuador" }
+  - { code: "gq", dial: "240", ru: "Экваториальная Гвинея", en: "Equatorial Guinea" }
+  - { code: "er", dial: "291", ru: "Эритрея", en: "Eritrea" }
+  - { code: "sz", dial: "268", ru: "Эсватини", en: "Eswatini" }
+  - { code: "ee", dial: "372", ru: "Эстония", en: "Estonia" }
+  - { code: "et", dial: "251", ru: "Эфиопия", en: "Ethiopia" }
+  - { code: "za", dial: "27", ru: "Южно-Африканская Республика", en: "South Africa" }
+  - { code: "ss", dial: "211", ru: "Южный Судан", en: "South Sudan" }
+  - { code: "jm", dial: "1", ru: "Ямайка", en: "Jamaica" }
+  - { code: "jp", dial: "81", ru: "Япония", en: "Japan" }
+  - { code: "ac", dial: "247", ru: "о-в Вознесения", en: "Ascension Island" }
+  - { code: "im", dial: "44", ru: "о-в Мэн", en: "Isle of Man" }
+  - { code: "nf", dial: "672", ru: "о-в Норфолк", en: "Norfolk Island" }
+  - { code: "cx", dial: "61", ru: "о-в Рождества", en: "Christmas Island" }
+  - { code: "sh", dial: "290", ru: "о-в Св. Елены", en: "St. Helena" }
+  - { code: "ky", dial: "1", ru: "о-ва Кайман", en: "Cayman Islands" }
+  - { code: "ck", dial: "682", ru: "о-ва Кука", en: "Cook Islands" }

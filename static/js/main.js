@@ -50,35 +50,81 @@ if (leadForm) {
   });
 }
 
-/* --- выбор кода страны у телефона: кастомный listbox (SVG-флаги) --- */
+/* --- выбор кода страны у телефона: listbox с поиском по названию/коду --- */
 document.querySelectorAll('[data-cc]').forEach((box) => {
   const btn = box.querySelector('.cc-btn');
-  const list = box.querySelector('.cc-list');
+  const pop = box.querySelector('.cc-pop');
+  const q = box.querySelector('.cc-q');
+  const empty = box.querySelector('.cc-empty');
   const cur = box.querySelector('.cc-cur');
   const hidden = box.querySelector('input[name="cc"]');
   const tel = box.querySelector('input[type="tel"]');
-  const opts = [...list.querySelectorAll('[role="option"]')];
+  const opts = [...box.querySelectorAll('[role="option"]')];
+  // популярные страны (до разделителя) дублируются в общем списке —
+  // при поиске их прячем, чтобы не было повторов
+  const sep = box.querySelector('.cc-sep');
+  const topLis = [];
+  for (let li = sep.previousElementSibling; li; li = li.previousElementSibling) topLis.push(li);
+  const visible = () => opts.filter(o => !o.parentElement.hidden);
+  const norm = (v) => v.toLowerCase().replace(/ё/g, 'е').trim();
+
+  const filter = () => {
+    const v = norm(q.value);
+    const digits = v.replace(/[^\d]/g, '');
+    const searching = v.length > 0;
+    topLis.forEach(li => { li.hidden = searching; });
+    sep.hidden = searching;
+    let n = 0;
+    opts.forEach((o) => {
+      if (topLis.includes(o.parentElement)) return;
+      const s = o.dataset.s;
+      // по цифрам ищем код («49», «+49»), по буквам — начало любого слова названия
+      const ok = !searching || (digits && /^[+\d\s]+$/.test(v)
+        ? o.dataset.dial.slice(1).startsWith(digits)
+        : s.startsWith(v) || s.includes(' ' + v) || s.includes('-' + v));
+      o.parentElement.hidden = !ok;
+      if (ok) n++;
+    });
+    empty.hidden = n > 0;
+    pop.querySelector('.cc-list').scrollTop = 0;
+  };
+
   const toggle = (open) => {
-    list.hidden = !open;
+    pop.hidden = !open;
     btn.setAttribute('aria-expanded', open);
-    if (open) (opts.find(o => o.getAttribute('aria-selected') === 'true') || opts[0]).focus();
+    if (open) {
+      q.value = '';
+      filter();
+      const sel = opts.find(o => o.getAttribute('aria-selected') === 'true');
+      if (sel) sel.scrollIntoView({ block: 'nearest' });
+      q.focus();
+    }
   };
   const pick = (o) => {
-    opts.forEach(x => x.setAttribute('aria-selected', x === o));
     const dial = o.dataset.dial;
+    opts.forEach(x => x.setAttribute('aria-selected', x.dataset.s === o.dataset.s));
     hidden.value = dial;
-    cur.innerHTML = o.querySelector('svg').outerHTML + `<b>${dial || '+'}</b>`;
-    tel.placeholder = dial ? box.dataset.ph : box.dataset.phOther;
+    cur.innerHTML = o.querySelector('.cc-flag').outerHTML + `<b>${dial}</b>`;
     toggle(false);
     tel.focus();
   };
-  btn.addEventListener('click', () => toggle(list.hidden));
+
+  btn.addEventListener('click', () => toggle(pop.hidden));
   opts.forEach(o => o.addEventListener('click', () => pick(o)));
-  list.addEventListener('keydown', (e) => {
-    const i = opts.indexOf(document.activeElement);
-    if (e.key === 'ArrowDown') { e.preventDefault(); opts[Math.min(i + 1, opts.length - 1)].focus(); }
-    else if (e.key === 'ArrowUp') { e.preventDefault(); opts[Math.max(i - 1, 0)].focus(); }
-    else if (e.key === 'Escape' || e.key === 'Tab') { toggle(false); if (e.key === 'Escape') btn.focus(); }
+  q.addEventListener('input', filter);
+  q.addEventListener('keydown', (e) => {
+    const v = visible();
+    if (e.key === 'ArrowDown' && v.length) { e.preventDefault(); v[0].focus(); }
+    else if (e.key === 'Enter') { e.preventDefault(); if (v.length) pick(v[0]); }
+  });
+  pop.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { toggle(false); btn.focus(); return; }
+    if (e.key === 'Tab') { toggle(false); return; }
+    if (document.activeElement === q) return;
+    const v = visible();
+    const i = v.indexOf(document.activeElement);
+    if (e.key === 'ArrowDown') { e.preventDefault(); v[Math.min(i + 1, v.length - 1)].focus(); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); i <= 0 ? q.focus() : v[i - 1].focus(); }
   });
   document.addEventListener('click', (e) => { if (!box.contains(e.target)) toggle(false); });
 });

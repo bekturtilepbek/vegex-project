@@ -201,32 +201,12 @@ contact:
     company_placeholder: "Название компании"
     phone_label: "Телефон"
     phone_placeholder: "Номер телефона"
-    phone_other_placeholder: "+ код страны и номер"
     cc_label: "Код страны"
-    # Код страны выбирается из списка; первая строка — значение по умолчанию.
-    # code — ключ SVG-флага в templates/sections/contact.html, dial: "" — «Другая страна».
-    phone_countries:
-      - { code: "de", name: "Германия", dial: "+49" }
-      - { code: "pl", name: "Польша", dial: "+48" }
-      - { code: "nl", name: "Нидерланды", dial: "+31" }
-      - { code: "at", name: "Австрия", dial: "+43" }
-      - { code: "cz", name: "Чехия", dial: "+420" }
-      - { code: "lt", name: "Литва", dial: "+370" }
-      - { code: "lv", name: "Латвия", dial: "+371" }
-      - { code: "ee", name: "Эстония", dial: "+372" }
-      - { code: "fr", name: "Франция", dial: "+33" }
-      - { code: "it", name: "Италия", dial: "+39" }
-      - { code: "es", name: "Испания", dial: "+34" }
-      - { code: "gb", name: "Великобритания", dial: "+44" }
-      - { code: "tr", name: "Турция", dial: "+90" }
-      - { code: "ae", name: "ОАЭ", dial: "+971" }
-      - { code: "ma", name: "Марокко", dial: "+212" }
-      - { code: "mn", name: "Монголия", dial: "+976" }
-      - { code: "kg", name: "Кыргызстан", dial: "+996" }
-      - { code: "kz", name: "Казахстан", dial: "+7" }
-      - { code: "uz", name: "Узбекистан", dial: "+998" }
-      - { code: "ru", name: "Россия", dial: "+7" }
-      - { code: "other", name: "Другая страна", dial: "" }
+    cc_search: "Поиск: страна или код"
+    cc_empty: "Ничего не найдено"
+    # Полный список стран — content/countries.yaml. Здесь — популярные
+    # (показываются сверху списка); первая — значение по умолчанию.
+    phone_top: [de, pl, nl, at, cz, lt, lv, ee, fr, it, es, gb, tr, ae, kg, kz]
     message_label: "Сообщение"
     message_placeholder: "Объём партии, сроки, вопросы..."
     submit: "Отправить →"
