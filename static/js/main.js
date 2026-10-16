@@ -41,7 +41,7 @@ if (leadForm) {
     if (company) lines.push(`Компания: ${company}`);
     const phone = (data.get('phone') || '').trim();
     const cc = (data.get('cc') || '').trim();
-    if (phone) lines.push(`Телефон: ${cc && !phone.startsWith('+') ? cc + ' ' : ''}${phone}`);
+    if (phone) lines.push(`Телефон: ${cc ? cc + ' ' : ''}${phone}`);
     const message = (data.get('message') || '').trim();
     if (message) lines.push(`Сообщение: ${message}`);
     if (status) { status.textContent = leadForm.dataset.opening; status.dataset.state = 'ok'; }
@@ -108,6 +108,19 @@ document.querySelectorAll('[data-cc]').forEach((box) => {
     toggle(false);
     tel.focus();
   };
+
+  // в номере — только цифры (код страны выбирается списком), максимум 15
+  // (E.164). Чистим и ввод, и вставку/автозаполнение, сохраняя позицию
+  // курсора. maxlength не ставим: он обрезал бы вставку «+996 (555) …»
+  // ещё до очистки и терял хвост номера.
+  tel.addEventListener('input', () => {
+    const v = tel.value;
+    const clean = v.replace(/\D/g, '').slice(0, 15);
+    if (clean === v) return;
+    const pos = Math.min(v.slice(0, tel.selectionStart).replace(/\D/g, '').length, clean.length);
+    tel.value = clean;
+    tel.setSelectionRange(pos, pos);
+  });
 
   btn.addEventListener('click', () => toggle(pop.hidden));
   opts.forEach(o => o.addEventListener('click', () => pick(o)));

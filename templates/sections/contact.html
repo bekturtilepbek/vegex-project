@@ -45,7 +45,7 @@
             <p class="cc-empty" hidden>{{ contact.form.cc_empty }}</p>
           </div>
           <input type="hidden" name="cc" value="+{{ cc0.dial }}">
-          <input id="lf-phone" type="tel" name="phone" inputmode="tel" autocomplete="tel-national" placeholder="{{ contact.form.phone_placeholder }}">
+          <input id="lf-phone" type="tel" name="phone" inputmode="numeric" pattern="[0-9]*" autocomplete="tel-national" placeholder="{{ contact.form.phone_placeholder }}">
         </div>
       </div>
       <div class="field">
