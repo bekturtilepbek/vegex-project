@@ -10,7 +10,7 @@
   {% if src %}
   <div class="ph" data-px="8" style="position:absolute;inset:0;border:none;border-radius:0;background:#0e1b12 url('{{ src }}') {{ pos }}/cover"></div>
   {% else %}
-  <div class="ph" style="position:absolute;inset:0;border:none;border-radius:0"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" style="opacity:.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span style="margin-top:6px">{{ hint | default('ЗДЕСЬ ФОТО') }}</span></div>
+  <div class="ph" style="position:absolute;inset:0;border:none;border-radius:0"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" style="opacity:.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span style="margin-top:6px">{{ hint | default('') }}</span></div>
   {% endif %}
   <div class="photo-pill" style="z-index:4">{{ cap }}</div>
 </div>

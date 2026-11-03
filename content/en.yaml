@@ -1,7 +1,7 @@
 site:
-  title: "VEGEX — Premium garlic from the Kyrgyz highlands"
-  description: "VEGEX exports premium high-altitude garlic from Kyrgyzstan: two Hardneck varieties (Royal violet, Ivory white), export-grade quality and reliable logistics for EU buyers."
-  cta: "Request pricing"
+  title: "VEGEX — Premium garlic from the high-altitude regions of Kyrgyzstan"
+  description: "VEGEX exports premium high-altitude garlic from Kyrgyzstan: Hardneck Royal Purple variety, export-grade quality and reliable logistics for EU buyers."
+  cta: "Contact us"
   menu_label: "Menu"
 
 nav:
@@ -14,27 +14,222 @@ nav:
 hero:
   photo: "hero-nature"
   photo_hint: "PHOTO GOES HERE (mountains, rivers, forests and fields of Kyrgyzstan — full-screen background)"
-  tagline: "Premium garlic from the Kyrgyz highlands"
+  tagline: "Premium garlic from the high-altitude regions of Kyrgyzstan"
   cta_primary: "Request pricing →"
   cta_secondary: "Specifications"
   scroll_cue: "Scroll down"
 
 facts:
   - { num: "1800+ m", label: "growing altitude" }
-  - { num: "70–90 mm", label: "main calibre (≈80%)" }
+  - { num: "70–90 mm", label: "main caliber (~80%)" }
   - { num: "8–10 mo", label: "shelf life in transit" }
   - { num: "10–12", label: "cloves per bulb" }
 
+about:
+  eyebrow: "About us"
+  title: "An exporter building long-term partnerships"
+  text: "VEGEX is a Kyrgyz export company specializing in the supply of fresh, premium garlic grown in the high-altitude regions of Kyrgyzstan. We supply carefully selected export-grade garlic to wholesalers, distributors, processors and retail chains in international markets."
+  mission: "Our goal is to build long-term partnerships based on consistent product quality, transparent communication and reliable export logistics."
+
+terroir:
+  eyebrow: "Natural advantages"
+  title: "Why Kyrgyz garlic"
+  intro: "Our garlic is cultivated in mountainous regions at high altitudes, where unique natural conditions foster superior product quality."
+  cards:
+    - { title: "High-altitude cultivation", text: "Plantations above 1800 m — slow, natural maturing." }
+    - { title: "Significant day/night temperature variation", text: "Concentrates flavour and bulb density." }
+    - { title: "Fertile soil", text: "Rich mountain soil supports large calibers." }
+    - { title: "Pristine mountain ecosystem", text: "Remote areas free from industrial pressure." }
+    - { title: "Mountain water rich in natural minerals", text: "Irrigated with clean glacier and river water." }
+    - { title: "Traditional cultivation methods", text: "Proven practices and careful manual sorting." }
+    - { title: "Manual sorting", text: "Every bulb is visually inspected before packing." }
+    - { title: "8–10 months shelf life", text: "Resilient through long-distance transport and storage." }
+    - { title: "Transparency at every stage", text: "Full traceability from field to shipment, documented at every step." }
+  note: "These conditions result in dense, large and well-matured garlic bulbs with an excellent marketable appearance and long shelf life. The unique growing environment also suggests a high natural allicin content."
+
+products:
+  eyebrow: "Our garlic"
+  title: "Royal variety — full transparency"
+  intro: "See exactly what you are buying: Royal variety (purple, Hardneck) — appearance, internal structure and calibration of every batch."
+  cards:
+    - { title: "Royal purple garlic", photo: "чеснок0125-редакт.", pos: "center 65%" }
+    - { title: "Internal structure", photo: "чеснок0220-редакт." }
+    - { title: "Calibration 60–100 mm", photo: "чеснок0130-редакт.", pos: "center 35%" }
+  divider:
+    photo: "чеснок0237-редакт."
+    title: "10–13 protective skin layers"
+    subtitle: "Reliable protection during long-distance transport"
+
+categories:
+  eyebrow: "Company growth"
+  title: "Other supply lines"
+  intro: "Beyond garlic, we plan to expand our range for long-term partners."
+  cards:
+    - { title: "Fresh fruit and vegetables", photo: "fresh_fruit_and_vegetables", hint: "PHOTO" }
+    - { title: "Frozen fruit and vegetables", photo: "frozen_fruit_and_vegetables", hint: "PHOTO" }
+    - { title: "Dried fruit and nuts", photo: "dried_fruits_and_nuts", hint: "PHOTO" }
+    - { title: "Legumes", photo: "legumes", hint: "PHOTO" }
+
+specs:
+  eyebrow: "Technical specifications"
+  title: "Export batch specification"
+  intro: "Fresh garlic, 2026 harvest. Clean, dry and meticulously sorted."
+  rows:
+    - { k: "Product", v: "Fresh garlic" }
+    - { k: "Country of origin", v: "Kyrgyzstan" }
+    - { k: "Variety", v: "Royal (purple)" }
+    - { k: "Type", v: "Hardneck" }
+    - { k: "Harvest", v: "2026" }
+    - { k: "Quality", v: "Premium export grade" }
+    - { k: "Color", v: "White with purple stripes" }
+    - { k: "Bulb diameter", v: "60–100 mm" }
+    - { k: "Average weight", v: "~150 g" }
+    - { k: "Number of cloves", v: "10–12" }
+    - { k: "Skin layers", v: "10–13" }
+    - { k: "Shelf life", v: "8–10 months" }
+    - { k: "CN code", v: "0703 20 00" }
+  side:
+    photo: "чеснок0134-редакт."
+    hint: "PHOTO GOES HERE"
+    badges:
+      - { num: "100", unit: "mm" }
+      - { num: "150", unit: "g" }
+    big: "80"
+    big_unit: "%"
+    big_sub: "of harvest — 70–90 mm caliber"
+    caliber:
+      - { label: "70–90 mm · main", pct: "~80%", w: 80, main: true }
+      - { label: "60–70 & 90–100 mm", pct: "~20%", w: 20 }
+  gallery:
+    - { label: "Ø 60 mm", photo: "чеснок0159-редакт." }
+    - { label: "Ø 70 mm", photo: "чеснок0156-редакт." }
+    - { label: "Ø 85 mm · main", photo: "чеснок0169-редакт." }
+  packaging:
+    eyebrow: "Packaging — customizable upon request"
+    items:
+      - { name: "Mesh bag", spec: "5 kg" }
+      - { name: "Crate", spec: "plastic / wooden · 10 kg" }
+      - { name: "Large mesh bag", spec: "20 / 25 / 30 kg" }
+      - { name: "Individual", spec: "to buyer's spec" }
+      - { name: "Private Label", spec: "your brand" }
+    photos:
+      - { photo: "чеснок0010 1-редакт." }
+      - { photo: "чеснок0019-редакт." }
+
+quality:
+  eyebrow: "Quality control"
+  title: "Transparent, documented, verifiable"
+  intro: "Every export shipment can be accompanied by a full set of documents. Independent inspection and laboratory testing available upon request."
+  docs:
+    sub: "Shipment documents"
+    items:
+      - "Commercial Invoice"
+      - "Packing List"
+      - "Certificate of Origin"
+      - "Phytosanitary Certificate"
+      - "Export Documents"
+      - "Pre-shipment Inspection (PSI)"
+    note: "Independent inspection available upon request:"
+    chips:
+      - { label: "SGS", hl: true }
+      - { label: "Bureau Veritas", hl: true }
+  lab:
+    sub: "Laboratory testing"
+    items:
+      - "Allicin content analysis"
+      - "Pest screening"
+      - "Pesticide residue analysis"
+      - "Microbiological analysis"
+      - "GlobalG.A.P. certification (upon request)"
+    note: "Conducted at accredited laboratories in:"
+    chips:
+      - { label: "Germany", code: "de", hl: true }
+      - { label: "Dubai", code: "ae", hl: true }
+    note2: "Additional certification requirements can be discussed if needed."
+  gallery:
+    eyebrow: "Visual documentation — provided to buyers upon request"
+    pairs:
+      - - { caption: "Garlic bulbs with a measuring tape", photo: "чеснок0295-редакт.", pos: "center 72%" }
+        - { caption: "Cross-section of a bulb", photo: "чеснок0264-редакт." }
+      - - { caption: "Calibration (with a caliper)", photo: "чеснок0322-редакт.", pos: "center 75%" }
+        - { caption: "Packaging process", photo: "чеснок0345-редакт." }
+    single:
+      caption: "VEGEX batch appearance"
+      photo: "packaging-branded"
+
+logistics:
+  eyebrow: "Logistics and supply geography"
+  title: "Reliable delivery to export markets"
+  intro: "Thanks to advanced curing technology and rigorous selection of bulbs with intact protective layers, our garlic keeps for 8–10 months, maintaining premium quality even after long-distance sea freight. We work with importers and retail chains in several countries and keep expanding our reach."
+  incoterms:
+    - { label: "EXW" }
+    - { label: "FCA" }
+    - { label: "CPT" }
+    - { label: "CIP" }
+    - { label: "DAP" }
+    - { label: "DDP*", soft: true }
+  incoterms_note: "* DDP — upon agreement"
+  customs_title: "Customs clearance for EU imports usually includes:"
+  customs:
+    - "Customs duty"
+    - "Import VAT"
+    - "Phytosanitary inspection"
+    - "Customs clearance"
+  customs_note: "Cost allocation depends on the chosen delivery terms (Incoterms)."
+  markets:
+    - { code: "de", name: "Germany" }
+    - { code: "pl", name: "Poland" }
+    - { code: "tr", name: "Turkey" }
+    - { code: "ma", name: "Morocco" }
+    - { code: "mn", name: "Mongolia" }
+
+contact:
+  eyebrow: "Let's work together"
+  title: "Request pricing and the 2026 harvest specification"
+  lead: "Open to working with importers, wholesalers, distributors and retail chains."
+  form:
+    title: "Send a request"
+    subtitle: "Fill in the form — we'll compose the message and open WhatsApp with it ready to send."
+    name_label: "Name"
+    name_placeholder: "Your name"
+    company_label: "Company"
+    company_placeholder: "Company name"
+    phone_label: "Phone"
+    phone_placeholder: "Phone number"
+    cc_label: "Country code"
+    cc_search: "Search: country or code"
+    cc_empty: "Nothing found"
+    # для EN-аудитории первым (по умолчанию) — Германия
+    phone_top: [de, pl, nl, at, cz, lt, lv, ee, fr, it, es, gb, tr, ae, kz, kg]
+    message_label: "Message"
+    message_placeholder: "Batch volume, timing, questions..."
+    submit: "Send →"
+    or_label: "or"
+    error: "Please enter your name"
+    opening: "Opening WhatsApp…"
+    msg:
+      title: "Request from the VEGEX website:"
+      name: "Name"
+      company: "Company"
+      phone: "Phone"
+      message: "Message"
+  whatsapp:
+    button: "Message us on WhatsApp"
+    prefill: "Hello! I'm interested in VEGEX garlic supplies."
+
 contacts:
+  ceo: "Daniyar Omurkulov"
+  ceo_role: "CEO"
   phone: "+996 555 555 594"
   phone_raw: "+996555555594"
+  whatsapp_raw: "996555555594"
   email: "vegex.kg@gmail.com"
   address:
     - "128 Aitmatov St, Bishkek"
     - "Kyrgyz Republic"
 
 footer:
-  about: "Export of premium garlic from the highland regions of Kyrgyzstan. Freshness, consistent quality, reliable logistics."
+  about: "Export of premium garlic from the high-altitude regions of Kyrgyzstan. Freshness, consistent quality, reliable logistics."
   sections_title: "Sections"
   links:
     - { label: "About", href: "#about" }

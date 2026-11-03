@@ -19,7 +19,10 @@
     <h3>{{ contact.form.title }}</h3>
     <p class="fs">{{ contact.form.subtitle }}</p>
     <form id="lead-form" data-wa="{{ contacts.whatsapp_raw }}"
-          data-err="{{ contact.form.error }}" data-opening="{{ contact.form.opening }}">
+          data-err="{{ contact.form.error }}" data-opening="{{ contact.form.opening }}"
+          data-msg-title="{{ contact.form.msg.title }}" data-msg-name="{{ contact.form.msg.name }}"
+          data-msg-company="{{ contact.form.msg.company }}" data-msg-phone="{{ contact.form.msg.phone }}"
+          data-msg-message="{{ contact.form.msg.message }}">
       <div class="field">
         <label for="lf-name">{{ contact.form.name_label }}</label>
         <input id="lf-name" type="text" name="name" required placeholder="{{ contact.form.name_placeholder }}">

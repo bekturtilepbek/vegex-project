@@ -36,14 +36,16 @@ if (leadForm) {
       if (status) { status.textContent = leadForm.dataset.err; status.dataset.state = 'err'; }
       return;
     }
-    const lines = ['Заявка с сайта VEGEX:', `Имя: ${name}`];
+    // подписи строк — из content/<lang>.yaml (contact.form.msg), через data-msg-*
+    const t = leadForm.dataset;
+    const lines = [t.msgTitle, `${t.msgName}: ${name}`];
     const company = (data.get('company') || '').trim();
-    if (company) lines.push(`Компания: ${company}`);
+    if (company) lines.push(`${t.msgCompany}: ${company}`);
     const phone = (data.get('phone') || '').trim();
     const cc = (data.get('cc') || '').trim();
-    if (phone) lines.push(`Телефон: ${cc ? cc + ' ' : ''}${phone}`);
+    if (phone) lines.push(`${t.msgPhone}: ${cc ? cc + ' ' : ''}${phone}`);
     const message = (data.get('message') || '').trim();
-    if (message) lines.push(`Сообщение: ${message}`);
+    if (message) lines.push(`${t.msgMessage}: ${message}`);
     if (status) { status.textContent = leadForm.dataset.opening; status.dataset.state = 'ok'; }
     const url = `https://wa.me/${leadForm.dataset.wa}?text=${encodeURIComponent(lines.join('\n'))}`;
     window.open(url, '_blank', 'noopener');

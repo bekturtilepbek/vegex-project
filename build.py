@@ -21,7 +21,7 @@ TEMPLATES = ROOT / "templates"
 STATIC = ROOT / "static"
 DIST = ROOT / "dist"
 
-LANGS = ["ru"]
+LANGS = ["ru", "en"]
 
 TRANSLIT = {
     "а": "a", "б": "b", "в": "v", "г": "g", "д": "d", "е": "e", "ё": "e",
@@ -114,6 +114,9 @@ def has_alpha(path: Path) -> bool:
         return im.mode in ("RGBA", "LA") or "transparency" in im.info
 
 
+_IMG_CACHE: dict = {}
+
+
 def copy_images(out_dir: Path) -> dict:
     """
     Сжимает фото (Pillow) и копирует как отдельные JPEG-файлы в
@@ -133,13 +136,15 @@ def copy_images(out_dir: Path) -> dict:
         if not f.is_file() or f.name.startswith("."):
             continue
         key = translit(f.stem)
-        if f.suffix.lower() in (".jpg", ".jpeg", ".png", ".webp") and not has_alpha(f):
-            data = compressed_jpeg_bytes(f)
-            dest = assets_dir / f"{key}.jpg"
-        else:
-            # прозрачные PNG/WEBP (напр. чеснок) отдаём как есть, иначе JPEG зальёт фон
-            data = f.read_bytes()
-            dest = assets_dir / f"{key}{f.suffix.lower()}"
+        # сжимаем один раз на сборку, остальные языки берут готовые байты
+        if f not in _IMG_CACHE:
+            if f.suffix.lower() in (".jpg", ".jpeg", ".png", ".webp") and not has_alpha(f):
+                _IMG_CACHE[f] = (compressed_jpeg_bytes(f), ".jpg")
+            else:
+                # прозрачные PNG/WEBP (напр. чеснок) отдаём как есть, иначе JPEG зальёт фон
+                _IMG_CACHE[f] = (f.read_bytes(), f.suffix.lower())
+        data, ext = _IMG_CACHE[f]
+        dest = assets_dir / f"{key}{ext}"
         dest.write_bytes(data)
         index[key] = f"assets/images/{dest.name}"
     return index
